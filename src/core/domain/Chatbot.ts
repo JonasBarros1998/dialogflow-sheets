@@ -7,15 +7,18 @@
 class Chatbot {
   private email: string;
   private phone: string;
+  private response: object;
 
   /**
     * @constructor
     * @param {string} email
     * @param {string} phone
+    * @param {string} response
   */
-  constructor(email: string, phone: string) {
+  constructor(email: string, phone: string, response: object) {
     this.email = email;
     this.phone = phone;
+    this.response = response;
   }
 
   /**
@@ -32,6 +35,13 @@ class Chatbot {
    */
   get accessPhone(): string {
     return this.phone;
+  }
+  /**
+   * @method
+   * @return {object}
+   */
+  get accessResponse(): object {
+    return this.response;
   }
   /**
    * Retorna email e telefone do usuário do chatbot
