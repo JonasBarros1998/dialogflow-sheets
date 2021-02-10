@@ -2,3 +2,4 @@ babel.config.js
 node_models
 jest.config.js
 dist
+testes.js
