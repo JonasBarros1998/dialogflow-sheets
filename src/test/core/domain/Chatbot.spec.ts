@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 
-import Chatbot from '../core/domain/Chatbot';
+import Chatbot from '../../../core/domain/Chatbot';
 
 describe('Class domain Chatbot ', function() {
   it('expect a user e-mail in a property of class Chatbot', function() {
@@ -30,7 +30,8 @@ describe('Class domain Chatbot ', function() {
         {response: 'email: jonas_barros@outlook.com, telefone: 1159442756'});
     expect(chatbot.accessResponse)
         .toEqual({
-          response: 'email: jonas_barros@outlook.com, telefone: 1159442756'});
+          response: 'email: jonas_barros@outlook.com, telefone: 1159442756',
+        });
   });
 
   it('expect to math object of user chatbot', function() {
@@ -41,5 +42,19 @@ describe('Class domain Chatbot ', function() {
       'email': 'jonas_barros@outlook.com',
       'phone': '11963582924',
     });
+  });
+
+  it('sending a invalid email, expect the property this.email receive message (e-mail invalid)', function() {
+    const chatbot = new Chatbot('jonas_barros@outlook',
+        '11963582924',
+        {response: 'email: jonas_barros@outlook, telefone: 1159442756'});
+    expect(chatbot.accessEmail).toBe('e-mail invalid');
+  });
+
+  it('sending valid email, expect the property this.email receive an e-mail the instance from class', function() {
+    const chatbot = new Chatbot('jonas_barros@outlook.com',
+        '11963582924',
+        {response: 'email: jonas_barros@outlook, telefone: 1159442756'});
+    expect(chatbot.accessEmail).toBe('jonas_barros@outlook.com');
   });
 });
