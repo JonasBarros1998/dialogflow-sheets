@@ -1,4 +1,6 @@
 /* eslint-disable max-len */
+
+import ValidEmail from '../validations/ValidEmail';
 /**
  * @class
  * @argument {string} nome
@@ -19,6 +21,7 @@ class Chatbot {
     this.email = email;
     this.phone = phone;
     this.response = response;
+    this.isValidEmail();
   }
 
   /**
@@ -64,6 +67,19 @@ class Chatbot {
       },
     });
     return userContact;
+  }
+  /**
+   * Verifica se o e-mail do usuário é valido
+   * @method
+   * @return {boolean}
+   */
+  private isValidEmail(): string {
+    const validEmail = new ValidEmail(this.accessEmail);
+    const isValidEmail = validEmail.isvalid();
+    if (isValidEmail === true) {
+      return this.email;
+    }
+    return this.email = 'e-mail invalid';
   }
 }
 
