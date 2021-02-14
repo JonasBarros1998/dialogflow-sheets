@@ -2,10 +2,10 @@
   "name": "dialogflow-sheets",
   "version": "1.0.0",
   "description": "Integração entre dialogflow e google sheets",
-  "main": "index.js",
+  "main": "src/core/infra/http/server.ts",
   "scripts": {
     "test": "jest",
-    "dev": "ts-node-dev --respawn --transpile-only --notify src/server.ts",
+    "dev": "ts-node-dev --respawn --transpile-only --ignore-watch node_modules src/core/infra/http/server.ts",
     "build": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files --no-copy-ignored",
     "start": "node dist/server.js"
   },
@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/JonasBarros1998/dialogflow-excel#readme",
   "dependencies": {
+    "@types/supertest": "^2.0.10",
     "express": "^4.17.1"
   },
   "devDependencies": {
@@ -37,6 +38,7 @@
     "eslint": "^7.19.0",
     "eslint-config-google": "^0.14.0",
     "jest": "^26.6.3",
+    "supertest": "^6.1.3",
     "ts-jest": "^26.5.0",
     "ts-node-dev": "^1.1.1",
     "typescript": "^4.1.3"
