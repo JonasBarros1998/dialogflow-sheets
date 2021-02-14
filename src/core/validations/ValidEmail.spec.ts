@@ -1,4 +1,4 @@
-import ValidEmail from '../../../core/validations/ValidEmail';
+import ValidEmail from '../../core/validations/ValidEmail';
 
 describe('unit test of class ValidEmail', function() {
   it('expect return true for the method isvalid', function() {
