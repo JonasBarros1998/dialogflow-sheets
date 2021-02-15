@@ -116,4 +116,10 @@ dist
 
 problema.txt
 
-teste.js
+testes.js
+example-google.js
+env.json
+env.ts
+token.json
+credentials.json
+z-example-google.js
