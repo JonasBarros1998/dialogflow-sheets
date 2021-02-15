@@ -9,12 +9,14 @@
     "removeComments": true, 
     "strict": true, 
     "noImplicitAny": true, 
-    "noEmitOnError": true,
+    "noEmitOnError": false,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
   },
   "include": [
-    "src/**/*"
+    "src/**/*",
+    "env.ts",
   ]
 }
