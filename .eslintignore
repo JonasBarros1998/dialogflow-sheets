@@ -3,3 +3,4 @@ node_models
 jest.config.js
 dist
 testes.js
+env.js
