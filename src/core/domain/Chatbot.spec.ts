@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 
-import Chatbot from '../../../core/domain/Chatbot';
+import Chatbot from './Chatbot';
 
 describe('Class domain Chatbot ', function() {
   it('expect a user e-mail in a property of class Chatbot', function() {
