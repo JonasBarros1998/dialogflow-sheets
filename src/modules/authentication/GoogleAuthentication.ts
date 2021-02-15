@@ -18,11 +18,12 @@ class GoogleAuthentication {
    * @return {Auth.OAuth2Client}
    */
   private authorize(): Auth.OAuth2Client {
-    const {clientSecret, clientId, redirectUris} = auth.web;
+    // eslint-disable-next-line camelcase
+    const {client_secret, client_id, redirect_uris} = auth.web;
     const googleAuth: Auth.OAuth2Client = new google.auth.OAuth2(
-        clientId,
-        clientSecret,
-        redirectUris[0]);
+        client_id,
+        client_secret,
+        redirect_uris[0]);
     googleAuth.setCredentials(this.credentialsWeb);
     return googleAuth;
   }

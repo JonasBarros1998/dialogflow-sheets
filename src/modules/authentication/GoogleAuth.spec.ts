@@ -7,13 +7,13 @@ describe('Google auth', function() {
     expect(googleAuth.credentials).toEqual(
         expect.objectContaining({
           web: expect.objectContaining({
-            clientSecret: expect.any(String),
-            projectId: expect.any(String),
-            clientId: expect.any(String),
-            authUri: expect.any(String),
-            tokenUri: expect.any(String),
-            authProviderX509CertUrl: expect.any(String),
-            redirectUris: expect.any(Array),
+            client_secret: expect.any(String),
+            project_id: expect.any(String),
+            client_id: expect.any(String),
+            auth_uri: expect.any(String),
+            token_uri: expect.any(String),
+            auth_provider_x509_cert_url: expect.any(String),
+            redirect_uris: expect.any(Array),
           }),
         }),
     );
