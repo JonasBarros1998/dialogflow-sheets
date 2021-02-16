@@ -1,4 +1,5 @@
 import GoogleAuthentication from './GoogleAuthentication';
+import GoogleSheets from '../googleSheets/domain/GoogleSheets';
 
 describe('Google auth', function() {
   it('get auth google token', function() {
@@ -17,7 +18,8 @@ describe('Google auth', function() {
 
   it('get datas google sheets', function() {
     const googleAuthentication = new GoogleAuthentication();
-    const sendDatas = googleAuthentication.auth();
-    googleAuthentication.listMajors(sendDatas);
+    const auth = googleAuthentication.auth();
+    GoogleSheets.sheets(auth);
+    expect(4).toEqual(4);
   });
 });
