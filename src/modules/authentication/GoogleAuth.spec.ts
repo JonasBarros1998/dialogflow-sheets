@@ -6,15 +6,11 @@ describe('Google auth', function() {
     const googleAuth = googleAuthentication.auth();
     expect(googleAuth.credentials).toEqual(
         expect.objectContaining({
-          web: expect.objectContaining({
-            client_secret: expect.any(String),
-            project_id: expect.any(String),
-            client_id: expect.any(String),
-            auth_uri: expect.any(String),
-            token_uri: expect.any(String),
-            auth_provider_x509_cert_url: expect.any(String),
-            redirect_uris: expect.any(Array),
-          }),
+          access_token: expect.any(String),
+          refresh_token: expect.any(String),
+          scope: expect.any(String),
+          token_type: expect.any(String),
+          expiry_date: expect.any(Number),
         }),
     );
   });
