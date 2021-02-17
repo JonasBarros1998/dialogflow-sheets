@@ -1,5 +1,6 @@
-import {google, Auth} from 'googleapis';
-
+/* eslint-disable max-len */
+/* eslint-disable camelcase */
+import {google, Auth, sheets_v4} from 'googleapis';
 
 /**
  * @class
@@ -8,38 +9,16 @@ class GoogleSheets {
   /**
    * @static
    * @param {Auth.OAuth2Client} auth
+   * @return {Promise<sheets_v4.Schema$ValueRange>}
    */
-  static sheets(auth: Auth.OAuth2Client): void {
+  static async sheets(auth: Auth.OAuth2Client): Promise<sheets_v4.Schema$ValueRange> {
     const sheets = google.sheets({version: 'v4', auth});
-    const spreadsheets = sheets.spreadsheets.values.get({
+    const spreadsheets = await sheets.spreadsheets.values.get({
       spreadsheetId: '1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms',
       range: 'Class Data!A2:E',
     });
-    console.log(spreadsheets);
+    return spreadsheets.data;
   }
 }
-
-
-// eslint-disable-next-line require-jsdoc
-/*
-function listMajors(auth: Auth.OAuth2Client) {
-  const sheets = google.sheets({version: 'v4', auth});
-  sheets.spreadsheets.values.get({
-    spreadsheetId: '1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms',
-    range: 'Class Data!A2:E',
-  }, (err:any, res) => {
-    if (err) return console.log('The API returned an error: ' + err);
-    const rows = res.data.values;
-    if (rows.length) {
-      console.log('Name, Major:');
-      // Print columns A and E, which correspond to indices 0 and 4.
-      rows.map((row: any) => {
-        console.log(`${row[0]}, ${row[4]}`);
-      });
-    } else {
-      console.log('No data found.');
-    }
-  });
-}*/
 
 export default GoogleSheets;
