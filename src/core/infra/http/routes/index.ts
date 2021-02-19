@@ -1,6 +1,6 @@
 import express from 'express';
-import router from './modules/Send';
-import {receiverRouter} from './modules/Receiver';
+import router from './send/send.route';
+import {receiverRouter} from './receiver/Receiver.route';
 
 const app = express();
 
