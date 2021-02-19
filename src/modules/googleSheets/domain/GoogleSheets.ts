@@ -1,6 +1,7 @@
 /* eslint-disable max-len */
 /* eslint-disable camelcase */
 import {google, Auth, sheets_v4} from 'googleapis';
+import env from '../../../../env.json';
 
 /**
  * @class
@@ -13,11 +14,11 @@ class GoogleSheets {
    */
   static async sheets(auth: Auth.OAuth2Client): Promise<sheets_v4.Schema$ValueRange> {
     const sheets = google.sheets({version: 'v4', auth});
-    const spreadsheets = await sheets.spreadsheets.values.get({
-      spreadsheetId: '1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms',
-      range: 'Class Data!A2:E',
+    const googleSheets = await sheets.spreadsheets.values.get({
+      spreadsheetId: env.sheet.spreadsheet_id,
+      range: 'A1:Z',
     });
-    return spreadsheets.data;
+    return googleSheets.data;
   }
 }
 
