@@ -6,8 +6,7 @@ import env from '../../../../env.json';
 describe('controller SendController', function() {
   request.body = {
     values: [
-      ['jonas', 'barros'],
-      ['computador', 'teclado'],
+      ['nome: Jonas florencio de barros, telefone: (00)90000-1111'],
     ],
     range: 'A1',
     spreedSheetId: env.sheet.spreadsheet_id,
