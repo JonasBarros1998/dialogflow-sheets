@@ -1,6 +1,7 @@
 /* eslint-disable camelcase */
 /* eslint-disable max-len */
 import {google, Auth, sheets_v4} from 'googleapis';
+import {GaxiosPromise} from 'gaxios';
 
 /**
  * @class
@@ -24,7 +25,7 @@ class SendGoogleSheets {
    * @method
    * @return {Promise<void | sheets_v4.Schema$AppendValuesResponse>}
    */
-  async send(): Promise<void | sheets_v4.Schema$AppendValuesResponse> {
+  async send(): Promise<GaxiosPromise<sheets_v4.Schema$AppendValuesResponse>> {
     const {
       values,
       range,
@@ -41,8 +42,7 @@ class SendGoogleSheets {
         majorDimension: majorDimension,
         values: values,
       },
-    }).then((response) => response.data)
-        .catch((err) => console.error(err));
+    });
   };
 }
 

@@ -1,6 +1,7 @@
 /* eslint-disable max-len */
 import {request, response} from 'express';
 import SendController from './SendController';
+import env from '../../../../env.json';
 
 describe('controller SendController', function() {
   request.body = {
@@ -9,7 +10,7 @@ describe('controller SendController', function() {
       ['computador', 'teclado'],
     ],
     range: 'A1',
-    spreedSheetId: '1nrLfKR9Wac-qULzOvXUZPDPLO4Uy-gcfOCqOSz1-7B0',
+    spreedSheetId: env.sheet.spreadsheet_id,
     majorDimension: 'ROWS',
     valueInputOption: 'RAW',
   };
