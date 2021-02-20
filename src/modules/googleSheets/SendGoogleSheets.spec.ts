@@ -7,8 +7,7 @@ describe('send datas google sheets', function() {
     const googleAuth = googleAuthentication.auth();
     const googleSheets = {
       values: [
-        ['jonas', 'florencio', 'barros'],
-        ['monitor', 'gabinete', 'teclado'],
+        ['nome: Jonas florencio de barros, telefone: (00)90000-1111'],
       ],
       range: 'A1',
       spreedSheetId: '1nrLfKR9Wac-qULzOvXUZPDPLO4Uy-gcfOCqOSz1-7B0',
