@@ -6,9 +6,11 @@ import {router, receiverRouter} from './routes/index';
 const app = express();
 const port = 3333;
 
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
+
 app.use(router);
 app.use(receiverRouter);
-app.use(express.json());
 
 app.listen(port, function() {
   console.log('server address: http://localhost:3333');
