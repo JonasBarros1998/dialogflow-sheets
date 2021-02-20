@@ -17,8 +17,8 @@ describe('send datas google sheets', function() {
     };
 
     const sendGoogleSheets = new SendGoogleSheets(googleAuth, googleSheets);
-    const datas = await sendGoogleSheets.send();
-    expect(datas).toEqual(
+    const {data} = await sendGoogleSheets.send();
+    expect(data).toEqual(
         expect.objectContaining({
           spreadsheetId: expect.any(String),
           tableRange: expect.any(String),
