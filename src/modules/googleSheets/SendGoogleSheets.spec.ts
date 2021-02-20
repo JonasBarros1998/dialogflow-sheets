@@ -3,17 +3,20 @@ import GoogleAuthentication from '../authentication/GoogleAuthentication';
 
 describe('send datas google sheets', function() {
   it('send datas', async function() {
-    const values = [
-      ['jonas', 'florencio', 'barros'],
-      ['monitor', 'gabinete', 'teclado'],
-    ];
     const googleAuthentication = new GoogleAuthentication();
     const googleAuth = googleAuthentication.auth();
-    const range = 'A1';
-    const spreedSheetId = '1nrLfKR9Wac-qULzOvXUZPDPLO4Uy-gcfOCqOSz1-7B0';
+    const googleSheets = {
+      values: [
+        ['jonas', 'florencio', 'barros'],
+        ['monitor', 'gabinete', 'teclado'],
+      ],
+      range: 'A1',
+      spreedSheetId: '1nrLfKR9Wac-qULzOvXUZPDPLO4Uy-gcfOCqOSz1-7B0',
+      majorDimension: 'ROWS',
+      valueInputOption: 'RAW',
+    };
 
-    const sendGoogleSheets = new SendGoogleSheets(
-        values, googleAuth, range, spreedSheetId);
+    const sendGoogleSheets = new SendGoogleSheets(googleAuth, googleSheets);
     const datas = await sendGoogleSheets.send();
     expect(datas).toEqual(
         expect.objectContaining({
