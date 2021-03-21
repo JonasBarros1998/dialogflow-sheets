@@ -7,7 +7,7 @@
     "test": "jest --maxWorkers=30%",
     "dev": "ts-node-dev --respawn --transpile-only --ignore-watch node_modules src/core/infra/http/server.ts",
     "build": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files --no-copy-ignored",
-    "start": "node dist/server.js"
+    "start": "node ./dist/core/infra/http/server.js"
   },
   "repository": {
     "type": "git",
@@ -21,6 +21,7 @@
   "homepage": "https://github.com/JonasBarros1998/dialogflow-excel#readme",
   "dependencies": {
     "@types/supertest": "^2.0.10",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "googleapis": "^67.0.0"
   },
@@ -30,6 +31,7 @@
     "@babel/node": "^7.12.13",
     "@babel/preset-env": "^7.12.13",
     "@babel/preset-typescript": "^7.12.13",
+    "@types/cors": "^2.8.10",
     "@types/express": "^4.17.11",
     "@types/jest": "^26.0.20",
     "@typescript-eslint/eslint-plugin": "^4.15.0",

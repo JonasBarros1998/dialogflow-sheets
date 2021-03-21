@@ -1,6 +1,7 @@
 import request from 'supertest';
+import env from '../../../../../../env.json';
 
-const receiverRequest = request('http://localhost:3333');
+const receiverRequest = request(`http://localhost:${env.port}`);
 
 describe('test router receiver/*', function() {
   it('success status code 200 | route: /send', async function() {
