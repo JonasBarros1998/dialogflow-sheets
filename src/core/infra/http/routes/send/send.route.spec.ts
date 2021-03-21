@@ -2,7 +2,8 @@
 import request from 'supertest';
 import env from '../../../../../../env.json';
 
-const baseUrl = 'http://localhost:3333';
+
+const baseUrl = `http://localhost:${env.port}`;
 const requestSupertest = request(baseUrl);
 
 describe('routes: /send/*', function() {
