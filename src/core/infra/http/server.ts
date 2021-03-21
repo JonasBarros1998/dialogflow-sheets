@@ -11,7 +11,7 @@ const port = env.port;
 
 const options: cors.CorsOptions = {
   methods: 'GET,POST',
-  origin: '*',
+  origin: env.domain,
 };
 
 app.use(cors(options));
