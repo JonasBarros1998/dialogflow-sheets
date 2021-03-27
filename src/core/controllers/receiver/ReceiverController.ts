@@ -12,8 +12,8 @@ class ReceiverController {
 
   /**
    * @constructor
-   * @param {object} req
-   * @param {object} res
+   * @param {Request} req
+   * @param {Response} res
    */
   constructor(req: Request, res: Response) {
     this.req = req;

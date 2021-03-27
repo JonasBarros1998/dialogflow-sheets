@@ -1,5 +1,6 @@
 import SendGoogleSheets from './SendGoogleSheets';
 import GoogleAuthentication from '../authentication/GoogleAuthentication';
+import env from '../../../env.json';
 
 describe('send datas google sheets', function() {
   it('send datas', async function() {
@@ -10,7 +11,7 @@ describe('send datas google sheets', function() {
         ['nome: Jonas florencio de barros, telefone: (00)90000-1111'],
       ],
       range: 'A1',
-      spreedSheetId: '1nrLfKR9Wac-qULzOvXUZPDPLO4Uy-gcfOCqOSz1-7B0',
+      spreadsheetId: env.sheet.spreadsheet_id,
       majorDimension: 'ROWS',
       valueInputOption: 'RAW',
     };

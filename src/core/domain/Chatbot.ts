@@ -21,7 +21,6 @@ class Chatbot {
     this.email = email;
     this.phone = phone;
     this.response = response;
-    this.isValidEmail();
   }
 
   /**
@@ -68,7 +67,10 @@ class Chatbot {
     });
     return userContact;
   }
+
   /**
+   * `**DEPRECATED**`
+   *
    * Verifica se o e-mail do usuário é valido
    * @method
    * @return {boolean}
