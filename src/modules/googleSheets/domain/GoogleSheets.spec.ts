@@ -5,7 +5,7 @@ describe('google sheets', function() {
   it('get datas google sheets', async function() {
     const googleAuthentication = new GoogleAuthentication();
     const auth = googleAuthentication.auth();
-    const googleSheets = await GoogleSheets.sheets(auth);
+    const googleSheets = await GoogleSheets.getSheets(auth);
     expect(googleSheets).toEqual(
         expect.objectContaining({
           range: expect.any(String),

@@ -8,11 +8,12 @@ import env from '../../../../env.json';
  */
 class GoogleSheets {
   /**
+   * Retorna os dados cadastrados em uma planilha do google sheets
    * @static
    * @param {Auth.OAuth2Client} auth
    * @return {Promise<sheets_v4.Schema$ValueRange>}
    */
-  static async sheets(auth: Auth.OAuth2Client): Promise<sheets_v4.Schema$ValueRange> {
+  static async getSheets(auth: Auth.OAuth2Client): Promise<sheets_v4.Schema$ValueRange> {
     const sheets = google.sheets({version: 'v4', auth});
     const googleSheets = await sheets.spreadsheets.values.get({
       spreadsheetId: env.sheet.spreadsheet_id,
