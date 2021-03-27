@@ -3,6 +3,8 @@
 import GoogleAuthentication from '../../../modules/authentication/GoogleAuthentication';
 import SendGoogleSheets from '../../../modules/googleSheets/SendGoogleSheets';
 import {Request, Response} from 'express';
+import {ISuccessResponse} from './interface/ISendController';
+
 /**
  * @class
  */
@@ -23,7 +25,7 @@ class SendController {
    * @method
    * @return {SendGoogleSheets}
    */
-  async sendGoogleSheets(): Promise<{message: string, status: boolean} | {message: string, stauts: boolean}> {
+  async sendGoogleSheets(): Promise<ISuccessResponse> {
     const googleAuthentication = new GoogleAuthentication();
     const auth = googleAuthentication.auth();
     const sendGoogleSheets = new SendGoogleSheets(auth, this.request.body);

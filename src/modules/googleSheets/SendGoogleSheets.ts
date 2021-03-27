@@ -1,22 +1,22 @@
 /* eslint-disable camelcase */
-/* eslint-disable max-len */
 import {google, Auth, sheets_v4} from 'googleapis';
 import {GaxiosPromise} from 'gaxios';
+import {IDatasGoogleSheets} from './interface/IDatasGoogleSheets';
 
 /**
  * @class
  */
 class SendGoogleSheets {
-  private googleSheets: {values: Array<string[]>, range: string,
-                         spreedSheetId: string, majorDimension: string,
-                         valueInputOption: string};
+  private googleSheets: IDatasGoogleSheets;
   private auth: Auth.OAuth2Client;
 
-  // eslint-disable-next-line require-jsdoc
+  /**
+   * @constructor
+   * @param {Auth.OAuth2Client} auth Google sheets credentials
+   * @param {IDatasGoogleSheets} googleSheets Datas for send google sheets
+   */
   constructor(auth: Auth.OAuth2Client,
-      googleSheets: {values: Array<string[]>,
-                     range: string, spreedSheetId: string,
-                     majorDimension: string, valueInputOption: string}) {
+      googleSheets: IDatasGoogleSheets) {
     this.googleSheets = googleSheets;
     this.auth = auth;
   }
@@ -29,18 +29,20 @@ class SendGoogleSheets {
     const {
       values,
       range,
-      spreedSheetId,
+      spreadsheetId,
       majorDimension,
       valueInputOption,
     } = this.googleSheets;
-    const sheets: sheets_v4.Sheets = google.sheets({version: 'v4', auth: this.auth});
+    const sheets: sheets_v4.Sheets = google
+        .sheets({version: 'v4', auth: this.auth});
+
     return await sheets.spreadsheets.values.append({
-      spreadsheetId: spreedSheetId,
-      valueInputOption: valueInputOption,
-      range: range,
+      spreadsheetId,
+      valueInputOption,
+      range,
       requestBody: {
-        majorDimension: majorDimension,
-        values: values,
+        majorDimension,
+        values,
       },
     });
   };
