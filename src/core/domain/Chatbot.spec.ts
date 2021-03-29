@@ -44,13 +44,6 @@ describe('Class domain Chatbot ', function() {
     });
   });
 
-  it('sending a invalid email, expect the property this.email receive message (e-mail invalid)', function() {
-    const chatbot = new Chatbot('jonas_barros@outlook',
-        '11963582924',
-        {response: 'email: jonas_barros@outlook, telefone: 1159442756'});
-    expect(chatbot.accessEmail).toBe('e-mail invalid');
-  });
-
   it('sending valid email, expect the property this.email receive an e-mail the instance from class', function() {
     const chatbot = new Chatbot('jonas_barros@outlook.com',
         '11963582924',
