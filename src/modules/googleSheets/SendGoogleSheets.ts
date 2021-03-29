@@ -15,15 +15,14 @@ class SendGoogleSheets {
    * @param {Auth.OAuth2Client} auth Google sheets credentials
    * @param {IDatasGoogleSheets} googleSheets Datas for send google sheets
    */
-  constructor(auth: Auth.OAuth2Client,
-      googleSheets: IDatasGoogleSheets) {
+  constructor(auth: Auth.OAuth2Client, googleSheets: IDatasGoogleSheets) {
     this.googleSheets = googleSheets;
     this.auth = auth;
   }
   /**
    * Escrever na planilha google sheets
    * @method
-   * @return {Promise<void | sheets_v4.Schema$AppendValuesResponse>}
+   * @return {Promise<GaxiosPromise<sheets_v4.Schema$AppendValuesResponse>>}
    */
   async send(): Promise<GaxiosPromise<sheets_v4.Schema$AppendValuesResponse>> {
     const {
@@ -35,9 +34,8 @@ class SendGoogleSheets {
     } = this.googleSheets;
     const sheets: sheets_v4.Sheets = google
         .sheets({version: 'v4', auth: this.auth});
-
     return await sheets.spreadsheets.values.append({
-      spreadsheetId,
+      spreadsheetId: spreadsheetId,
       valueInputOption,
       range,
       requestBody: {

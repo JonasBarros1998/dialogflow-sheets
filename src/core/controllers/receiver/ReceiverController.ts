@@ -27,7 +27,7 @@ class ReceiverController {
   async receiver(): Promise<GoogleSheets> {
     const googleAuth = new GoogleAuthentication();
     const auth = googleAuth.auth();
-    return await GoogleSheets.sheets(auth);
+    return await GoogleSheets.getSheets(auth);
   }
 }
 export default ReceiverController;
