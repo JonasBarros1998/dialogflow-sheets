@@ -8,4 +8,9 @@ routerAuth.get('/authentication',
     },
 );
 
+routerAuth.post('/token',
+    function(request: Request, response: Response) {
+      return response.json({'url': '/auth'});
+    });
+
 export {routerAuth};
