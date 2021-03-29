@@ -31,7 +31,10 @@ class SendController {
     const sendGoogleSheets = new SendGoogleSheets(auth, this.request.body);
     return await sendGoogleSheets.send()
         .then(() => ({message: 'Dados adicionados com sucesso', status: true}))
-        .catch(() => ({message: 'Não foi possível salvar os dados', status: false}));
+        .catch((error) => {
+          console.log(error);
+          return {message: 'Não foi possível salvar os dados', status: false};
+        });
   }
 }
 
