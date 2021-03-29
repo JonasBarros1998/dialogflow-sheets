@@ -1,9 +1,11 @@
 import {Router, Request, Response} from 'express';
 
-const router = Router();
+const routerAuth = Router();
 
-router.get('/authentication',
+routerAuth.get('/authentication',
     function(request: Request, response: Response) {
       return response.json({'url': '/authentication'});
     },
 );
+
+export {routerAuth};
