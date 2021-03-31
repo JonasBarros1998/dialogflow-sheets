@@ -31,7 +31,6 @@ class GoogleAuthentication {
   }
   /**
    * @method
-   * @param {Auth.OAuth2Client} googleAuth
    * @return {Auth.OAuth2Client}
    */
   auth(): Auth.OAuth2Client {
