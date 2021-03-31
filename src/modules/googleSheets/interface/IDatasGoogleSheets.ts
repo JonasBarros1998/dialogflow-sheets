@@ -1,9 +1,11 @@
 interface IDatasGoogleSheets {
-  values: Array<string[]>;
   range: string;
   spreadsheetId: string;
-  majorDimension: string;
   valueInputOption: string;
+  requestBody: {
+    majorDimension: string;
+    values: Array<string[]>;
+  };
 }
 
 export {IDatasGoogleSheets};
