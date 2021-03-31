@@ -4,6 +4,9 @@ import {GaxiosPromise} from 'gaxios';
 import {IDatasGoogleSheets} from './interface/IDatasGoogleSheets';
 
 /**
+ * DECREPTED
+ * Utilize o metodo `sendData` da classe SendDataGoogleSheets
+ * modules/googleSheets/sendData/SendDataGoogleSheets
  * @class
  */
 class SendGoogleSheets {
@@ -20,7 +23,12 @@ class SendGoogleSheets {
     this.auth = auth;
   }
   /**
-   * Escrever na planilha google sheets
+   * DECREPTED
+   *
+   * Utilize o metodo `sendData` da classe SendDataGoogleSheets
+   * modules/googleSheets/sendData/SendDataGoogleSheets
+   *
+   * Tem função de enviar dados na planilha do google
    * @method
    * @return {Promise<GaxiosPromise<sheets_v4.Schema$AppendValuesResponse>>}
    */
