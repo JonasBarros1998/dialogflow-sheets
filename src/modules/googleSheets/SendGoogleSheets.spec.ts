@@ -1,3 +1,6 @@
+/**
+ * MODULO DE TESTE DEPRECIADO
+ */
 import SendGoogleSheets from './SendGoogleSheets';
 import GoogleAuthentication from '../authentication/GoogleAuthentication';
 import env from '../../../env.json';
