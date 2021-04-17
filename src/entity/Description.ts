@@ -4,7 +4,7 @@ class Description {
   }
 
   static valid(description: string) {
-    if (typeof description === 'string' && description.length > 300) {
+    if (typeof description === 'string' && description.length >= 300) {
       return true;
     }
     return false;
