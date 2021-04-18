@@ -8,10 +8,10 @@ class Name {
     map.set('undefined', false);
     map.set(undefined, false);
     map.set('', false);
-    if (map.get(name.trim()) === undefined) {
-      return true;
+    if (map.get(name.trim()) === false) {
+      return false;
     }
-    return false;
+    return true;
   }
 }
 
