@@ -4,7 +4,7 @@
   "description": "Integração entre dialogflow e google sheets",
   "main": "src/core/infra/http/server.ts",
   "scripts": {
-    "test": "jest --maxWorkers=30%",
+    "test": "jest ./src/entity/Phone.spec.ts --maxWorkers=30%",
     "dev": "ts-node-dev --respawn --transpile-only --ignore-watch node_modules src/core/infra/http/server.ts",
     "build": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files --no-copy-ignored",
     "start": "node ./dist/core/infra/http/server.js"
