@@ -4,8 +4,8 @@ class Phone {
   }
 
   static valid(phone: string) {
-    if (typeof phone === 'string' && phone.length >= 9) {
-      const regex = /\(([0-9][0-9])\) [0-9]{5}-[0-9]{4}/g;
+    if (typeof phone === 'string' && phone.length >= 12) {
+      const regex = /\(([0-9][0-9])\) [0-9]{5}-[0-9]{4}/gi;
       const regexp = new RegExp(regex, 'gi');
       return regexp.test(phone);
     }
