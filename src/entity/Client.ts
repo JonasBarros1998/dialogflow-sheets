@@ -14,7 +14,7 @@ class Client {
     Object.freeze(this);
   }
 
-  static create(client: IClient): void | Array<IClient> {
+  static create(client: IClient): Array<IClient> {
     const map = new Map();
     const clientList: Array<IClient> = [];
     const clientKeys: Array<string> = Object.keys(client);
@@ -26,7 +26,7 @@ class Client {
 
     clientKeys.map(function(info) {
       if (map.get(info) === false) {
-        throw new Error(`The Property ${info} is false`);
+        throw new TypeError(`The Property ${info} is false`);
       }
     });
 
