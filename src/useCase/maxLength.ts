@@ -1,5 +1,6 @@
 import {Validation} from './interface/validation';
 import Description from '../entity/Description';
+import {Message} from './interface/Error';
 
 class MaxLength implements Validation {
   private descriptionClient: Description
@@ -7,16 +8,19 @@ class MaxLength implements Validation {
     this.descriptionClient = new Description(description);
   }
 
-  valid(): boolean | string {
+  valid(): Message {
     try {
       this.length();
     } catch (e) {
       if (e instanceof Error) {
-        return e.message;
+        const messageError: Message = {status: false, message: e.message};
+        return messageError;
       }
-      return e;
+      const messageErrorStack: Message = {status: false, message: 'error', stacktrace: e};
+      return messageErrorStack;
     }
-    return true;
+    const messageSucess: Message = {status: true, message: 'sucess'};
+    return messageSucess;
   }
 
   private length(): void {
