@@ -1,4 +1,5 @@
+import {IClient} from '../../entity/interfaces/IClient';
 export interface IDataBase {
-  save(): Promise<object>
-  list(): Promise<object>
+  save(client: IClient): IClient
+  list(): void
 }
