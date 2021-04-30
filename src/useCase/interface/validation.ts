@@ -1,3 +1,5 @@
+import {Message} from './Error';
+
 export interface Validation {
-  valid(): void;
+  valid(): Message;
 }
