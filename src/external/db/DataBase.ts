@@ -1,18 +1,17 @@
 import {google} from 'googleapis';
 import {IDataBase} from '../../adapters/gateway/IDataBase';
 import {IClient} from '../../entity/interfaces/IClient';
-import AuthenticationAdapter from './adapter/AuthenticationAdapter';
-import {IAuthentication} from './interfaces/IAuthentication';
 import env from '../../../env.json';
+import CreateAutentication from './CreateAuthentication';
 
 class DataBase implements IDataBase {
-  private authentication: IAuthentication;
+  private createAuthentication: CreateAutentication;
+
   constructor() {
-    this.authentication = new AuthenticationAdapter();
+    this.createAuthentication = new CreateAutentication();
   }
 
   private prepareDatasToSendInDataBase(client: IClient): string[][] {
-    // console.log(JSON.stringify(client));
     const datasFormatted = [[
       `${client.name}`,
       `${client.email}`,
@@ -24,8 +23,7 @@ class DataBase implements IDataBase {
 
   async save(client: IClient): Promise<void> {
     const dataClient = this.prepareDatasToSendInDataBase(client);
-    const credentials = this.authentication.authenticationUser();
-    const sheets = google.sheets({version: 'v4', auth: credentials});
+    const sheets = this.createAuthentication.auth2();
     const spreadsheets = await sheets.spreadsheets.values.append({
       spreadsheetId: env.sheet.spreadsheet_id,
       valueInputOption: 'RAW',
