@@ -1,4 +1,3 @@
-import {google} from 'googleapis';
 import {IDataBase} from '../../adapters/gateway/IDataBase';
 import {IClient} from '../../entity/interfaces/IClient';
 import env from '../../../env.json';
@@ -21,19 +20,20 @@ class DataBase implements IDataBase {
     return datasFormatted;
   }
 
-  async save(client: IClient): Promise<void> {
+  async save(client: IClient, validInputOption:string = 'RAW', range:string = 'A1',
+      dimension: string = 'Rows'): Promise<any> {
     const dataClient = this.prepareDatasToSendInDataBase(client);
     const sheets = this.createAuthentication.auth2();
-    const spreadsheets = await sheets.spreadsheets.values.append({
+
+    return await sheets.spreadsheets.values.append({
       spreadsheetId: env.sheet.spreadsheet_id,
-      valueInputOption: 'RAW',
-      range: 'A1',
+      valueInputOption: validInputOption,
+      range: range,
       requestBody: {
-        majorDimension: 'ROWS',
+        majorDimension: dimension,
         values: dataClient,
       },
     });
-    console.log('status spreadsheets >>>> ', spreadsheets);
   }
 
   list(): void {
