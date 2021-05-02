@@ -22,14 +22,17 @@ class AddClient {
     return validDescription;
   }
 
-  addClient(): Message | Array<IClient> {
+  async toAdd(): Promise<void> {
     const description = this.validingMaxLengthDescription();
-    if (description.status === true) {
+    return new Promise((resolve, reject) => {
       const [client] = Client.create(this.client);
-      this.database.save(client);
-      return [client];
-    }
-    return description;
+      if (description.status === true) {
+        this.database.save(client)
+            .then((response) => (resolve(response)))
+            .catch((error) => (reject(error)));
+      }
+      reject(description);
+    });
   }
 }
 
