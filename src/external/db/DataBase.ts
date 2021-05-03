@@ -1,3 +1,5 @@
+/* eslint-disable camelcase */
+/* eslint-disable max-len */
 import {IDataBase} from '../../adapters/gateway/IDataBase';
 import {IClient} from '../../entity/interfaces/IClient';
 import env from '../../../env.json';
@@ -22,11 +24,10 @@ class DataBase implements IDataBase {
     return datasFormatted;
   }
 
-  async save(client: IClient, validInputOption:string = 'RAW', range:string = 'A1',
-      dimension: string = 'Rows'): Promise<any> {
+  async save(client: IClient, validInputOption:string = 'RAWS', range:string = 'A1',
+      dimension: string = 'Rows'): Promise<ISucess|IErrors> {
     const dataClient = this.prepareDatasToSendInDataBase(client);
     const sheets = this.createAuthentication.auth2();
-
     return await sheets.spreadsheets.values.append({
       spreadsheetId: env.sheet.spreadsheet_id,
       valueInputOption: validInputOption,
@@ -35,7 +36,12 @@ class DataBase implements IDataBase {
         majorDimension: dimension,
         values: dataClient,
       },
-    });
+    })
+        .then((response) => ({statusText: response.statusText}))
+        .catch((error) => {
+          const err = error.errors[0];
+          throw new Error(err.message);
+        });
   }
 
   list(): void {
