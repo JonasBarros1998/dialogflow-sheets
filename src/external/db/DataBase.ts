@@ -2,6 +2,8 @@ import {IDataBase} from '../../adapters/gateway/IDataBase';
 import {IClient} from '../../entity/interfaces/IClient';
 import env from '../../../env.json';
 import CreateAutentication from './CreateAuthentication';
+import {IErrors} from './interfaces/IErrors';
+import {ISucess} from './interfaces/ISucess';
 
 class DataBase implements IDataBase {
   private createAuthentication: CreateAutentication;
