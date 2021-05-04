@@ -23,18 +23,15 @@ class AddClient {
     return validDescription;
   }
 
-  async toAdd(): Promise<any> {
+  async toAdd(validInputOption:string = 'RAW', range:string = 'A1',
+      dimension:string = 'Rows'): Promise<any> {
     const description = this.validingMaxLengthDescription();
     return new Promise((resolve, reject) => {
-      const [client] = Client.create(this.client);
       if (description.status === true) {
-        return this.database.save(client)
-            .then((response) => {
-              console.log('response >> ', response);
-            })
-            .catch((error) => {
-              console.log('catch >> ', error);
-            });
+        const [client] = Client.create(this.client);
+        return this.database.save(client, validInputOption, range, dimension)
+            .then((response) => resolve(response))
+            .catch((error) => reject(error));
       }
       return reject(description);
     });
