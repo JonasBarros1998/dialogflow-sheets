@@ -24,7 +24,7 @@ class DataBase implements IDataBase {
     return datasFormatted;
   }
 
-  async save(client: IClient, validInputOption:string = 'RAWS', range:string = 'A1',
+  async save(client: IClient, validInputOption:string = 'RAW', range:string = 'A1',
       dimension: string = 'Rows'): Promise<ISucess|IErrors> {
     const dataClient = this.prepareDatasToSendInDataBase(client);
     const sheets = this.createAuthentication.auth2();
