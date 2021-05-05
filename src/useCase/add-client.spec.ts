@@ -44,32 +44,37 @@ describe('suit test class AddClient', function() {
     );
   });
 
-  it(`if call method addClient, will returned a array with datas the client`, function() {
-    const database:IDataBase = new DataBase();
-    const client = new AddClient(datasOfClient, database);
-    expect(client.addClient()).toEqual(
-        expect.arrayContaining([{
-          name: expect.any(String),
-          description: expect.any(String),
-          email: expect.any(String),
-          phone: expect.any(String),
-        }]),
-    );
-  });
-
   it(`if send description with less 300 characters, the method
-    addClient will returned the description error`, function() {
+    addClient will returned the description error`, async function() {
     const invalidDataClient: IClient = {
-      name: 'Jonas',
+      name: 'Jonas Barros',
       description: wrongDescription,
       email: 'primary_email@gamail.com.us',
       phone: '(11) 99945-8990',
     };
     const phrase = `The Property description is less 300 characters`;
-    const database:IDataBase = new DataBase();
+    const database: IDataBase = new DataBase();
     const client = new AddClient(invalidDataClient, database);
-    const addclient: any = client.addClient();
-    expect(addclient.message).toEqual(expect.stringMatching(phrase));
-    expect(addclient.status).toBeFalsy();
+    const validInputOption = 'RAW';
+    await client.toAdd(validInputOption)
+        .catch((error) =>
+          expect(error.message).toEqual(phrase));
+  });
+
+  it(`If send a datas the a client, the method 
+    toAdd, will returned status OK`, async function() {
+    const validClient: IClient = {
+      name: 'firts Name',
+      description: description,
+      email: 'first_email@gmail.com.us',
+      phone: '(11) 99999-8907',
+    };
+
+    const database: IDataBase = new DataBase();
+    const client = new AddClient(validClient, database);
+    const statusText = 'OK';
+    await client.toAdd()
+        .then((response) =>
+          expect(response.statusText).toEqual(statusText));
   });
 });

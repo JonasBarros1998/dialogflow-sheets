@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable valid-jsdoc */
 import MaxLength from './maxLength';
 import {Validation} from './interface/validation';
@@ -22,14 +23,18 @@ class AddClient {
     return validDescription;
   }
 
-  addClient(): Message | Array<IClient> {
+  async toAdd(validInputOption:string = 'RAW', range:string = 'A1',
+      dimension:string = 'Rows'): Promise<any> {
     const description = this.validingMaxLengthDescription();
-    if (description.status === true) {
-      const [client] = Client.create(this.client);
-      this.database.save(client);
-      return [client];
-    }
-    return description;
+    return new Promise((resolve, reject) => {
+      if (description.status === true) {
+        const [client] = Client.create(this.client);
+        return this.database.save(client, validInputOption, range, dimension)
+            .then((response) => resolve(response))
+            .catch((error) => reject(error));
+      }
+      return reject(description);
+    });
   }
 }
 
