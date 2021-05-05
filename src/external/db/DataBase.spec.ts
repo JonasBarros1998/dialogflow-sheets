@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import DataBase from './DataBase';
 import {IClient} from '../../entity/interfaces/IClient';
 
@@ -18,56 +19,35 @@ const datasOfClient: IClient = {
 
 describe('suit test class DataBase', function() {
   it(`if save with invalid property validInputOption will returned
-  status 404 bad request`, async function() {
+  a message explain the error`, async function() {
     const database = new DataBase();
     const validInputOption = 'Text';
+    const errorMessage = `Invalid value at 'value_input_option' (type.googleapis.com/google.apps.sheets.v4.ValueInputOption), "Text"`;
     await database.save(datasOfClient, validInputOption)
         .catch(function(error) {
-          const [errors] = error.errors;
-          expect(error.response.status).toEqual(400);
-          expect(error.response.statusText).toEqual('Bad Request');
-          expect(errors).toEqual(
-              expect.objectContaining({
-                message: expect.any(String),
-                reason: expect.any(String),
-              }),
-          );
+          expect(error.message).toEqual(errorMessage);
         });
   });
 
   it(`if send a invalid property range, will returned 
-    status 404 bad request`, async function() {
+    a message explain the error`, async function() {
     const database = new DataBase();
     const range = '123243';
+    const errorMessage = `Invalid value at 'value_input_option' (type.googleapis.com/google.apps.sheets.v4.ValueInputOption), "123243"`;
     await database.save(datasOfClient, range)
         .catch(function(error) {
-          const [errors] = error.errors;
-          expect(error.response.status).toEqual(400);
-          expect(error.response.statusText).toEqual('Bad Request');
-          expect(errors).toEqual(
-              expect.objectContaining({
-                message: expect.any(String),
-                reason: expect.any(String),
-              }),
-          );
+          expect(error.message).toEqual(errorMessage);
         });
   });
 
-  it(`if send a invalid property dimension, will returned 
-    status 404 bad request`, async function() {
+  it(`if send a invalid property dimension, will returned
+    a message explain the error`, async function() {
     const database = new DataBase();
     const dimension = 'BIG';
+    const errorMessage = `Invalid value at 'value_input_option' (type.googleapis.com/google.apps.sheets.v4.ValueInputOption), "BIG"`;
     await database.save(datasOfClient, dimension)
         .catch(function(error) {
-          const [errors] = error.errors;
-          expect(error.response.status).toEqual(400);
-          expect(error.response.statusText).toEqual('Bad Request');
-          expect(errors).toEqual(
-              expect.objectContaining({
-                message: expect.any(String),
-                reason: expect.any(String),
-              }),
-          );
+          expect(error.message).toEqual(errorMessage);
         });
   });
 });
