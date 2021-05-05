@@ -17,14 +17,6 @@ const datasOfClient: IClient = {
 };
 
 describe('suit test class DataBase', function() {
-  it('if save datas sucess, will return response with status 200', async function() {
-    const database = new DataBase();
-    database.save(datasOfClient)
-        .then(function(response) {
-          expect(response.status).toEqual(200);
-        });
-  });
-
   it(`if save with invalid property validInputOption will returned
   status 404 bad request`, async function() {
     const database = new DataBase();
