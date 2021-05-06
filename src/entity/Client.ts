@@ -1,3 +1,4 @@
+/* eslint-disable no-throw-literal */
 import Name from './Name';
 import Description from './Description';
 import Email from './Email';
@@ -23,13 +24,12 @@ class Client {
     map.set('description', Description.valid(client.description));
     map.set('email', Email.valid(client.email));
     map.set('phone', Phone.valid(client.phone));
-
     clientKeys.map(function(info) {
-      if (map.get(info) === false) {
-        throw new TypeError(`The Property ${info} is false`);
+      if (map.get(info) === false || map.get(info) === undefined) {
+        const typeError = new TypeError(`The Property ${info} is invalid`);
+        throw {message: typeError.message, stacktrace: typeError.stack};
       }
     });
-
     clientList.push(client);
     return clientList;
   }
