@@ -13,10 +13,14 @@ class MaxLength implements Validation {
       this.length();
     } catch (e) {
       if (e instanceof Error) {
-        const messageError: Message = {status: false, message: e.message};
+        const messageError: Message = {status: false,
+          message: e.message,
+          stacktrace: e.stack};
         return messageError;
       }
-      const messageErrorStack: Message = {status: false, message: 'error', stacktrace: e};
+      const messageErrorStack: Message = {status: false,
+        message: e.message,
+        stacktrace: e};
       return messageErrorStack;
     }
     const messageSucess: Message = {status: true, message: 'sucess'};
