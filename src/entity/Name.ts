@@ -6,9 +6,8 @@ class Name {
   static valid(name: string) {
     const map = new Map();
     map.set('undefined', false);
-    map.set(undefined, false);
     map.set('', false);
-    if (map.get(name.trim()) === false) {
+    if (typeof name !== 'string' || map.get(name.trim()) === false) {
       return false;
     }
     return true;
