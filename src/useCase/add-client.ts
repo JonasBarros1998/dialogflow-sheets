@@ -25,10 +25,10 @@ class AddClient {
 
   async toAdd(validInputOption:string = 'RAW', range:string = 'A1',
       dimension:string = 'Rows'): Promise<any> {
+    const [client] = Client.create(this.client);
     const description = this.validingMaxLengthDescription();
     return new Promise((resolve, reject) => {
       if (description.status === true) {
-        const [client] = Client.create(this.client);
         return this.database.save(client, validInputOption, range, dimension)
             .then((response) => resolve(response))
             .catch((error) => reject(error));
