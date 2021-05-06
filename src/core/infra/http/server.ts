@@ -24,9 +24,6 @@ app.use(routerAuth);
 
 app.listen(port, function() {
   console.log(`server address: http://localhost:${port}`);
-  // const googleAuthentication = new GoogleAuthentication();
-  // const auth = googleAuthentication.auth();
-  // googleAuthentication.listMajors(auth);
 });
 
 export default app;
