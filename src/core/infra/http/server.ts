@@ -1,5 +1,5 @@
 import express from 'express';
-import {router, receiverRouter, routerAuth} from './routes/index';
+import {router, receiverRouter /* routerAuth*/} from './routes/index';
 import cors from 'cors';
 import env from '../../../../env.json';
 
@@ -20,13 +20,10 @@ app.use(express.urlencoded({extended: true}));
 
 app.use(router);
 app.use(receiverRouter);
-app.use(routerAuth);
+// app.use(routerAuth);
 
 app.listen(port, function() {
   console.log(`server address: http://localhost:${port}`);
-  // const googleAuthentication = new GoogleAuthentication();
-  // const auth = googleAuthentication.auth();
-  // googleAuthentication.listMajors(auth);
 });
 
 export default app;
