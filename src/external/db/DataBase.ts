@@ -37,7 +37,7 @@ class DataBase implements IDataBase {
         values: dataClient,
       },
     })
-        .then((response) => ({statusText: response.statusText}))
+        .then(() => ({statusText: 'OK', datas: client}))
         .catch((error) => {
           const err = error.errors[0];
           throw new Error(err.message);
