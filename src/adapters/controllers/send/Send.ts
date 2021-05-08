@@ -22,8 +22,8 @@ class Send implements IControllerValidate {
       return requestIsValid;
     }
     return this.newClient.toAdd()
-        .then(function(response) {
-          console.log(response);
+        .then((response) => {
+          return this.response.status(201).json(response);
         })
         .catch((error) => {
           return this.response.status(500).json({status: false, message: error.message});
