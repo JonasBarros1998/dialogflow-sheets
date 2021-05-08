@@ -1,11 +1,12 @@
-import {Request, response, Response} from 'express';
-import {IAddClient} from '../../../useCase/interface/iadd-client';
+import {Request, Response} from 'express';
 import AddClient from '../../../useCase/add-client';
 import {IDataBase} from '../../gateway/IDataBase';
 import DataBase from '../../../external/db/DataBase';
 import {IClient} from '../../../entity/interfaces/IClient';
+import {IControllerValidate} from '../interface/IControllerValidate';
+import {IMessageController} from '../../../shared/interfaces/IMessageController';
 
-class Send {
+class Send implements IControllerValidate {
   private database: IDataBase;
   private body: IClient;
   private newClient: AddClient
@@ -16,7 +17,7 @@ class Send {
   }
 
   sendData() {
-    const requestIsValid = this.validRequest(this.body);
+    const requestIsValid = this._validateRequest(this.body);
     if (requestIsValid !== true) {
       return requestIsValid;
     }
@@ -25,31 +26,31 @@ class Send {
           console.log(response);
         })
         .catch((error) => {
-          return this.response.status(500).send(error);
+          return this.response.status(500).json({status: false, message: error.message});
         });
   }
 
-  private validRequest(body: IClient) {
-    const objectIsEmpty = this.emptyObject(body);
+  _validateRequest(body: IClient): boolean | Response {
+    const objectIsEmpty = this._emptyObject(body);
     if (objectIsEmpty.status === false) {
       return this.response.status(500).json(objectIsEmpty);
     }
-    const bodyIsObject = this.typeofObjectObdy(body);
+    const bodyIsObject = this._typeofObject(body);
     if (bodyIsObject.status === false) {
       return this.response.status(500).json(bodyIsObject);
     }
     return true;
   }
 
-  private emptyObject(body: object) {
+  _emptyObject(body: object): IMessageController {
     const keys = Object.keys(body);
     if (keys.length === 0) {
-      return {status: false, message: `The object don't can empty`};
+      return {status: false, message: `The object is empty`};
     }
     return {status: true, message: 'sucess'};
   }
 
-  private typeofObjectObdy(body: object) {
+  _typeofObject(body: object): IMessageController {
     if (typeof body !== 'object') {
       return {status: false, message: `the body don't is object. typeof ${typeof body}`};
     }
