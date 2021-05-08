@@ -26,8 +26,7 @@ class Client {
     map.set('phone', Phone.valid(client.phone));
     clientKeys.map(function(info) {
       if (map.get(info) === false || map.get(info) === undefined) {
-        const typeError = new TypeError(`The Property ${info} is invalid`);
-        throw {message: typeError.message, stacktrace: typeError.stack};
+        throw new Error(`The property ${info} is invalid`);
       }
     });
     clientList.push(client);
