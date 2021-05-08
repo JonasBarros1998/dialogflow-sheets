@@ -9,7 +9,7 @@ import {IMessageController} from '../../../shared/interfaces/IMessageController'
 class Send implements IControllerValidate {
   private database: IDataBase;
   private body: IClient;
-  private newClient: AddClient
+  private newClient: AddClient;
   constructor(private request: Request, private response: Response) {
     this.database = new DataBase();
     this.body = this.request.body;
@@ -18,8 +18,11 @@ class Send implements IControllerValidate {
 
   sendData() {
     const requestIsValid = this._validateRequest(this.body);
-    if (requestIsValid !== true) {
-      return requestIsValid;
+    if (requestIsValid.status !== true) {
+      return this.response
+          .status(requestIsValid.statusCode)
+          .json({status: requestIsValid.status,
+            message: requestIsValid.message});
     }
     return this.newClient.toAdd()
         .then((response) => {
@@ -30,31 +33,35 @@ class Send implements IControllerValidate {
         });
   }
 
-  _validateRequest(body: IClient): boolean | Response {
+  _validateRequest(body: IClient): IMessageController {
     const objectIsEmpty = this._emptyObject(body);
     if (objectIsEmpty.status === false) {
-      return this.response.status(500).json(objectIsEmpty);
+      return objectIsEmpty;
     }
     const bodyIsObject = this._typeofObject(body);
     if (bodyIsObject.status === false) {
-      return this.response.status(500).json(bodyIsObject);
+      return bodyIsObject;
     }
-    return true;
+    return {status: true, message: 'sucess', statusCode: 200};
   }
 
   _emptyObject(body: object): IMessageController {
     const keys = Object.keys(body);
     if (keys.length === 0) {
-      return {status: false, message: `The object is empty`};
+      return {status: false,
+        message: `The object is empty`,
+        statusCode: 400};
     }
-    return {status: true, message: 'sucess'};
+    return {status: true, message: 'sucess', statusCode: 200};
   }
 
   _typeofObject(body: object): IMessageController {
     if (typeof body !== 'object') {
-      return {status: false, message: `the body don't is object. typeof ${typeof body}`};
+      return {status: false,
+        message: `the body don't is object. typeof ${typeof body}`,
+        statusCode: 400};
     }
-    return {status: true, message: 'sucess'};
+    return {status: true, message: 'sucess', statusCode: 200};
   }
 }
 
