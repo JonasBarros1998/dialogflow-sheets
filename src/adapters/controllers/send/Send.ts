@@ -1,4 +1,4 @@
-import {Request, Response} from 'express';
+import {response} from 'express';
 import AddClient from '../../../useCase/add-client';
 import {IDataBase} from '../../gateway/IDataBase';
 import DataBase from '../../../external/db/DataBase';
@@ -8,28 +8,33 @@ import {IMessageController} from '../../../shared/interfaces/IMessageController'
 
 class Send implements IControllerValidate {
   private database: IDataBase;
-  private body: IClient;
-  private newClient: AddClient;
-  constructor(private request: Request, private response: Response) {
+  private body: any
+  constructor(body: any) {
+    this.body = body;
     this.database = new DataBase();
-    this.body = this.request.body;
-    this.newClient = new AddClient(this.body, this.database);
   }
 
   sendData() {
     const requestIsValid = this._validateRequest(this.body);
     if (requestIsValid.status !== true) {
-      return this.response
+      return response
           .status(requestIsValid.statusCode)
           .json({status: requestIsValid.status,
             message: requestIsValid.message});
     }
-    return this.newClient.toAdd()
-        .then((response) => {
-          return this.response.status(201).json(response);
+    const client: IClient = {
+      name: this.body.name,
+      description: this.body.description,
+      email: this.body.email,
+      phone: this.body.phone,
+    };
+    const addClient = new AddClient(client, this.database);
+    return addClient.toAdd()
+        .then((result) => {
+          return response.status(201).json(result);
         })
         .catch((error) => {
-          return this.response.status(500).json({status: false, message: error.message});
+          return response.status(500).json({status: false, message: error.message});
         });
   }
 
