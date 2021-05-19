@@ -1,26 +1,30 @@
-import {response} from 'express';
+import {Response} from 'express';
 import AddClient from '../../../useCase/add-client';
 import {IDataBase} from '../../gateway/IDataBase';
 import DataBase from '../../../external/db/DataBase';
 import {IClient} from '../../../entity/interfaces/IClient';
 import {IControllerValidate} from '../interface/IControllerValidate';
 import {IMessageController} from '../../../shared/interfaces/IMessageController';
+import {IResponse} from '../interface/IResponse';
+import ResponseController from '../Response/Response';
 
 class Send implements IControllerValidate {
   private database: IDataBase;
-  private body: any
-  constructor(body: any) {
+  private body: any;
+  private responseController: IResponse;
+  constructor(body: any, private response: Response) {
     this.body = body;
     this.database = new DataBase();
+    this.responseController = new ResponseController(this.response);
   }
 
   sendData() {
     const requestIsValid = this._validateRequest(this.body);
     if (requestIsValid.status !== true) {
-      return response
-          .status(requestIsValid.statusCode)
-          .json({status: requestIsValid.status,
-            message: requestIsValid.message});
+      return this.responseController
+          .send(requestIsValid.statusCode,
+              {status: requestIsValid.status,
+                message: requestIsValid.message});
     }
     const client: IClient = {
       name: this.body.name,
@@ -31,10 +35,13 @@ class Send implements IControllerValidate {
     const addClient = new AddClient(client, this.database);
     return addClient.toAdd()
         .then((result) => {
-          return response.status(201).json(result);
+          return this.responseController.send(201, result);
         })
         .catch((error) => {
-          return response.status(500).json({status: false, message: error.message});
+          return this.responseController
+              .send(500,
+                  {status: false,
+                    message: error.message});
         });
   }
 
