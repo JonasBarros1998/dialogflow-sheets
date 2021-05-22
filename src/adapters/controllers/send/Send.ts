@@ -25,9 +25,7 @@ class Send {
     const client = createClient(this.req);
     const addClient = new AddClient(client, this.database);
     return addClient.toAdd()
-        .then((result) => {
-          return this.responseController.send(201, result);
-        })
+        .then((result) => this.responseController.send(201, result))
         .catch((error) => {
           return this.responseController
               .send(500,
