@@ -7,6 +7,7 @@ class Name {
     const map = new Map();
     map.set('undefined', false);
     map.set('', false);
+    map.set(undefined, false);
     if (typeof name !== 'string' || map.get(name.trim()) === false) {
       return false;
     }
