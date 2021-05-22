@@ -1,5 +1,6 @@
 import {Router} from 'express';
-import Send from '../../../../../adapters/controllers/send/Send';
+import Send from '../../../adapters/controllers/send/Send';
+
 
 const router = Router();
 
