@@ -7,7 +7,7 @@
     "test": "jest --maxWorkers=30%",
     "dev": "ts-node-dev --respawn --transpile-only --ignore-watch node_modules src/external/http/server.ts",
     "build": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files --no-copy-ignored",
-    "start": "node ./dist/core/infra/http/server.js"
+    "start": "node ./dist/external/http/server.js"
   },
   "repository": {
     "type": "git",
