@@ -1,5 +1,3 @@
-/* eslint-disable max-len */
-/* eslint-disable valid-jsdoc */
 import MaxLength from './maxLength';
 import {Validation} from './interface/validation';
 import Client from '../entity/Client';
