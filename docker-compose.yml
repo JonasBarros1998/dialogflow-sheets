@@ -1,0 +1,19 @@
+version: "3.8"
+services: 
+  nodejs: 
+    image: jonasflorencio/dialogflow-sheets:1.0
+    container_name: dialogflow
+    stdin_open: true
+    tty: true 
+    ports: 
+      - "8080:8080"
+    networks: 
+      - developer
+    volumes: 
+      - /home/jonas/developer/iadeveloper/dialogflow-sheets:/home/app
+
+networks: 
+  developer: 
+    name: developer-network
+    driver: bridge
+

@@ -1,13 +1,14 @@
-FROM node:14.16.0-alpine3.10 AS build
+FROM node:14.16.0-alpine3.10 AS NodeJs
 ENV DIRECTORY=/home/app
 WORKDIR ${DIRECTORY}
 RUN npm -g install typescript
-COPY ["package.json", "./"]
-WORKDIR ${DIRECTORY}/src
-COPY ["./src", "."]
-WORKDIR ${DIRECTORY}
-RUN npm install
-COPY ["./env.json", "./credentials.json", "./tsconfig.json", "./jest.config.js", "./babel.config.js", "./"]
-RUN npm run build
+COPY . .
 EXPOSE 8080
-CMD ["npm", "start"]
+
+FROM NodeJs AS developer
+CMD npm install && npm run dev
+
+# FROM NodeJs AS build
+# COPY . .
+# RUN npm run build
+# CMD ["npm", "start"]
