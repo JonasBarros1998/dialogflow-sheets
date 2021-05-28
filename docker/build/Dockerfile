@@ -4,11 +4,5 @@ WORKDIR ${DIRECTORY}
 RUN npm -g install typescript
 COPY . .
 EXPOSE 8080
-
-FROM NodeJs AS developer
-CMD npm install && npm run dev
-
-# FROM NodeJs AS build
-# COPY . .
-# RUN npm run build
-# CMD ["npm", "start"]
+RUN npm run build
+CMD ["npm", "start"]
