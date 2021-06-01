@@ -12,18 +12,30 @@ variables:
   tag: '$(Build.BuildId)'
 
 stages:
-- stage: Build
-  displayName: Build image
-  jobs:
-  - job: Build
-    displayName: Build
-    pool:
+- state: Tests
+  displayName: 'execution tests'
+  jobs: 
+  - job: Tests
+    displayName: 'tests with jest'
+    pool: 
       vmImage: ubuntu-latest
-    steps:
-    - task: Docker@2
-      displayName: Build an image
-      inputs:
-        command: build
-        dockerfile: '$(Build.SourcesDirectory)/docker/build/Dockerfile'
-        tags: |
-          $(tag)
+    steps: 
+    - task: Npm@1
+      command: 'install'
+      workingDir: .
+    - task: Npm@1
+      command: 'run dev'
+    
+#- stage: Build
+#  displayName: 'build image docker'
+#  jobs:
+#  - job: Build
+#    displayName: Build
+#    pool:
+#      vmImage: ubuntu-latest
+#    steps:
+#    - task: Docker@2
+#      displayName: Build an image
+#      inputs:
+#        command: login
+#        containerRegistry: 
