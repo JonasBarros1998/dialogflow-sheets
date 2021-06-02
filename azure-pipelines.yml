@@ -6,16 +6,37 @@
 trigger:
 - CI_CD
 
-pool: 
-  vmImage: 'ubuntu-latest'
+resources:
+- repo: self
 
-variables: 
-  localDockerfile: './docker/build/Dockerfile'
+variables:
+  tag: '$(Build.BuildId)'
 
-steps: 
-- task: Docker@2
-  displayName: docker build -f $(localDockerfile) -t jonasflorencio/dialogflow-sheets .
-
-
-
-
+stages:
+- state: Tests
+  displayName: 'execution tests'
+  jobs: 
+  - job: Tests
+    displayName: 'tests with jest'
+    pool: 
+      vmImage: ubuntu-latest
+    steps: 
+    - task: Npm@1
+      command: 'install'
+      workingDir: .
+    - task: Npm@1
+      command: 'run dev'
+    
+#- stage: Build
+#  displayName: 'build image docker'
+#  jobs:
+#  - job: Build
+#    displayName: Build
+#    pool:
+#      vmImage: ubuntu-latest
+#    steps:
+#    - task: Docker@2
+#      displayName: Build an image
+#      inputs:
+#        command: login
+#        containerRegistry: 
