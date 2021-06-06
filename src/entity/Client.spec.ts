@@ -12,7 +12,7 @@ const description = `
 
 
 describe('Suit test class Client ', function() {
-  it('throwing TypeError in method create, the class Client', function() {
+  it('throwing InvalidParam in method create, the class Client', function() {
     const client = {
       'name': 'my name',
       'description': description,
