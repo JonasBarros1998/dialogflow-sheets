@@ -4,6 +4,7 @@ import Description from './Description';
 import Email from './Email';
 import Phone from './Phone';
 import {IClient} from './interfaces/IClient';
+import InvalidClient from '../shared/err/InvalidClient';
 
 class Client {
   constructor(readonly name: Name, readonly description: Description,
@@ -26,7 +27,7 @@ class Client {
     map.set('phone', Phone.valid(client.phone));
     clientKeys.map(function(info) {
       if (map.get(info) === false || map.get(info) === undefined) {
-        throw new Error(`The property ${info} is invalid`);
+        throw new InvalidClient(`The property ${info} is invalid`);
       }
     });
     clientList.push(client);
