@@ -1,11 +1,10 @@
-/* eslint-disable camelcase */
-/* eslint-disable max-len */
+import dotenv from 'dotenv';
 import {IDataBase} from '../../adapters/gateway/IDataBase';
 import {IClient} from '../../entity/interfaces/IClient';
-import env from '../../../env.json';
 import CreateAutentication from './CreateAuthentication';
 import {IErrors} from './interfaces/IErrors';
 import {ISucess} from './interfaces/ISucess';
+dotenv.config();
 
 class DataBase implements IDataBase {
   private createAuthentication: CreateAutentication;
@@ -29,7 +28,7 @@ class DataBase implements IDataBase {
     const dataClient = this.prepareDatasToSendInDataBase(client);
     const sheets = this.createAuthentication.auth2();
     return await sheets.spreadsheets.values.append({
-      spreadsheetId: env.sheet.spreadsheet_id,
+      spreadsheetId: process.env.SPREADSHEET_ID,
       valueInputOption: validInputOption,
       range: range,
       requestBody: {

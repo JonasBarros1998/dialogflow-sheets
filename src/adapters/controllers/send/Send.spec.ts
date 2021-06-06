@@ -1,7 +1,8 @@
 import supertest from 'supertest';
-import env from '../../../../env.json';
+import dotenv from 'dotenv';
+dotenv.config();
 
-const request = supertest(env.domain_develop);
+const request = supertest(process.env.DOMAIN_DEVELOP);
 
 const description = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
   Praesent feugiat tortor metus, sed volutpat dolor accumsan quis. 
