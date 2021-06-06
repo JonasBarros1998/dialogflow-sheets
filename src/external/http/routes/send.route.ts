@@ -1,12 +1,12 @@
-import {Router} from 'express';
-import Send from '../../../adapters/controllers/send/Send';
-
+import {Router, Response, Request} from 'express';
+import RouterAdapter from '../../../main/adapters/RouterAdapter';
 
 const router = Router();
 
-router.post('/send', async function(request, response) {
-  const send = new Send(request.body, response);
-  return send.sendData();
+router.post('/send', async function(request: Request, response: Response) {
+  const routerAdapter = new RouterAdapter();
+  const router = await routerAdapter.send(request, response);
+  return router;
 });
 
 export default router;
