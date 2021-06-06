@@ -1,16 +1,21 @@
-import auth from '../../../env.json';
 import {google, Auth} from 'googleapis';
+import dotenv from 'dotenv';
+dotenv.config();
 
 class GoogleAuthentication {
   private authorize(): Auth.OAuth2Client {
-    // eslint-disable-next-line camelcase
-    const {client_secret, client_id, redirect_uris} = auth.web;
     const googleAuth: Auth.OAuth2Client = new google.auth.OAuth2(
-        client_id,
-        client_secret,
-        redirect_uris[0]);
+        process.env.CLIENT_ID,
+        process.env.CLIENT_SECRET,
+        process.env.REDIRECT_URIS);
 
-    googleAuth.setCredentials(auth.credentials);
+    googleAuth.setCredentials({
+      access_token: process.env.ACCESS_TOKEN,
+      refresh_token: process.env.REFRESH_TOKEN,
+      scope: process.env.SCOPE,
+      token_type: process.env.TOKEN_TYPE,
+      expiry_date: Number(process.env.EXPIRY_DATE),
+    });
     return googleAuth;
   }
 
