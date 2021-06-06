@@ -1,0 +1,6 @@
+deploy: 
+	gcloud config set project [PROJECT-ID]
+	gcloud auth configure-docker
+	docker build -f ./docker/build/Dockerfile -t gcr.io/[PROJECT-ID]/dialogflow-sheets .
+	docker push gcr.io/[PROJECT-ID]/dialogflow-sheets
+	gcloud run deploy dialogflow-sheets --image gcr.io/[PROJECT-ID]/dialogflow-sheets --region us-central1 --platform managed
