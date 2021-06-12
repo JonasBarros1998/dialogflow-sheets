@@ -9,5 +9,5 @@ export interface IDataBase {
     dimension?: string
   ): Promise<ISucess|IErrors>
 
-  list(): void
+  list(): Promise<Array<[][]> | void | null>
 }

@@ -1,6 +1,7 @@
 import dotenv from 'dotenv';
 import {IDataBase} from '../../adapters/gateway/IDataBase';
 import {IClient} from '../../entity/interfaces/IClient';
+import {IGoogleSheetsError} from '../../shared/interfaces/IGoogleSheetsError';
 import CreateAutentication from './CreateAuthentication';
 import {IErrors} from './interfaces/IErrors';
 import {ISucess} from './interfaces/ISucess';
@@ -43,8 +44,18 @@ class DataBase implements IDataBase {
         });
   }
 
-  list(): void {
-    return;
+  async list(range: string = 'A1:D3000',
+      spreadsheetId = process.env.SPREADSHEET_ID): Promise<Array<[][]> | void | null> {
+    const sheets = this.createAuthentication.auth2();
+    return await sheets.spreadsheets.values.get({
+      spreadsheetId,
+      range,
+    })
+        .then((response) => response.data.values)
+        .catch(function(error) {
+          const [err]: IGoogleSheetsError = error.errors;
+          throw new Error(err.message);
+        });
   }
 }
 
