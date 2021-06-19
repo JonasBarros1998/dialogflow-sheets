@@ -9,5 +9,6 @@ export interface IDataBase {
     dimension?: string
   ): Promise<ISucess|IErrors>
 
-  list(): Promise<Array<[][]> | void | null>
+  list(range: string,
+    spreadsheetId?: string | undefined): Promise<Array<[][]> | void | null>
 }
