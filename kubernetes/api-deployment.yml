@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-deployment
+spec: 
+  replicas: 1
+  selector: 
+    matchLabels: 
+      app: api-deployment
+  template:
+    metadata: 
+      name: dialogflow-chatbot
+      labels: 
+        app: api-deployment
+    spec: 
+      containers: 
+        - name: container-dialogflow
+          image: gcr.io/developer-trainning/dialogflow-sheets
+          imagePullPolicy: Always
+          resources: 
+            requests: 
+              cpu: "100m"
+              memory: "300Mi"
+            limits: 
+              cpu: "800m"
+              memory: "1000Mi"
+          ports: 
+            - name: porta-aplicacao
+              containerPort: 8080
+              hostPort: 8080
+          livenessProbe: 
+            successThreshold: 1
+            initialDelaySeconds: 10
+            periodSeconds: 60
+            httpGet: 
+              path: /client
+              port: porta-aplicacao
+              httpHeaders: 
+                - name: Content-Type
+                  value: application/json
+      imagePullSecrets: 
+      - name: gcr-json-key
