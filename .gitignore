@@ -127,5 +127,4 @@ package-lock.json
 docker.sh
 package-lock.json
 Makefile
-readme.md
 cloudbuild-legancy.yaml
